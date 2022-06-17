@@ -21,7 +21,7 @@ public class AnalyticsCounter {
 
             writer.writeSymptoms(mapFromFile);
         } catch (FileNotFoundException e) {
-            System.out.println("File " + fileName +" not found");
+            System.out.println("File " + fileName + " not found");
         }
     }
 }

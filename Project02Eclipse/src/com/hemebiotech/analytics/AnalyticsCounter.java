@@ -9,7 +9,7 @@ public class AnalyticsCounter {
         CheckSymptomFile checkSymptomFile = new CheckSymptomFile();
         String filePathFromClassPath;
         String fileName = "symptoms.txt";
-        String outPutFile = "result.out";
+        String outPutFile = "result";
 
         try {
             filePathFromClassPath = checkSymptomFile.getFilePathFromClassPath(fileName);

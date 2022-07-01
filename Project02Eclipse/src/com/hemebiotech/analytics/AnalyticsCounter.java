@@ -1,7 +1,8 @@
 package com.hemebiotech.analytics;
 
 import java.io.FileNotFoundException;
-import java.util.Map;
+import java.util.List;
+import java.util.TreeMap;
 
 public class AnalyticsCounter {
 
@@ -14,12 +15,13 @@ public class AnalyticsCounter {
         try {
             filePathFromClassPath = checkSymptomFile.getFilePathFromClassPath(fileName);
             ISymptomReader reader = new ReadSymptomDataFromFile(filePathFromClassPath);
+            ISymptomCounter counter = new CountSymptom();
             ISymptomWriter writer = new WriteSymptomOnNewFile(outPutFile);
 
-            Map<String, Integer> mapFromFile
-                    = reader.hashMapSymptoms();
+            List<String> symptoms = reader.readSymptoms();
+            TreeMap<String, Integer> mapSymptoms = counter.orderedSymptoms(symptoms);
+            writer.writeSymptoms(mapSymptoms);
 
-            writer.writeSymptoms(mapFromFile);
         } catch (FileNotFoundException e) {
             System.out.println("File " + fileName + " not found");
         }

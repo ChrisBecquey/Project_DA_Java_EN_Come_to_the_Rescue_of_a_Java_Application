@@ -1,7 +1,11 @@
 package com.hemebiotech.analytics;
 
-import java.io.*;
-import java.util.TreeMap;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Simple brute force implementation
@@ -19,30 +23,22 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 
     // On utilise le TreeMap pour avoir le tri par ordre alphabétique
     @Override
-    public TreeMap<String, Integer> hashMapSymptoms() {
-        TreeMap<String, Integer> mapSymptoms
-                = new TreeMap<>();
+    public List<String> readSymptoms() {
+        List<String> symptomsList = new ArrayList<>();
 
         File file = new File(filepath);
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line = reader.readLine();
-            int count = 1;
-            while ((line != null)) {
-                String symptoms = line;
 
-                if (!mapSymptoms.containsKey(symptoms)) {
-                    mapSymptoms.put(symptoms, count);
-                } else {
-                    Integer currentValue = mapSymptoms.get(symptoms);
-                    mapSymptoms.replace(symptoms, ++currentValue);
-                }
+            while ((line != null)) {
+                symptomsList.add(line);
                 line = reader.readLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return mapSymptoms;
+        return symptomsList;
     }
 
 }

@@ -13,6 +13,7 @@ public class WriteSymptomOnNewFile implements ISymptomWriter {
     public WriteSymptomOnNewFile(String file) {
         this.file = file;
     }
+
     @Override
     public void writeSymptoms(Map<String, Integer> mapFromFile) {
         if (file != null) {
